@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <input type="text" class="form-control" [(ngModel)]="keyword" placeholder="Search here ....">
+        </div>  <!--6 Ends Here-->
+        <div class="col-md-1  offset-md-5">
+            <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
+        </div> <!--1 Ends Here-->
+    </div> <!--row Ends Here-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center text-success">{{msg}}</p>
+            <table class="table table-bordered table-sm">
+                <thead class="text-primary">
+                    <tr>
+                        <th> </th>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of pagesList | filter:keyword | paginate: { itemsPerPage: 5, currentPage: p }">
+                        <td>
+                            <input type="checkbox" [(ngModel)]="row.checked"/>    
+                        </td>
+                        <td> <a href="{{row.link}}" target="_blank">{{row.name}}</a> </td>
+                        <td>{{row.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <em class="text-danger">* Click the checkbox to save</em>
+        </div> <!--12 Ends Here-->
+    </div> <!--row Ends Here-->
+
+    <div class="row">
+        <div class="col-md-12 text-center p-3">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div> 
+    </div> <!--row Ends Here-->
+
+</div> <!--container Ends Here-->
